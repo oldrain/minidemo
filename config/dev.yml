@@ -1,0 +1,37 @@
+app:
+  name: demo
+  env: dev
+
+error:
+  200: Success
+  10001: System error
+
+mysql:
+  userMaster:
+    url: root:123456@(127.0.0.1:3306)/user?charset=utf8mb4&parseTime=True&loc=Local
+    maxOpenConn: 100
+    maxIdleConn: 10
+    connMaxLifeTime: 60
+
+redis:
+  testSingle:
+    addr: 127.0.0.1:6379
+    password:
+    type: single
+    db: 0
+    poolSize: 10
+    poolTimeout: 30
+    idleTimeout: 30
+    MaxRetries: 3
+    maxRedirects: 3
+
+  testCluster:
+    addr: 127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003
+    password:
+    type: cluster
+    db: 0
+    poolSize: 10
+    poolTimeout: 30
+    idleTimeout: 30
+    MaxRetries: 3
+    maxRedirects: 3
