@@ -1,26 +1,17 @@
 package main
 
 import (
-	"flag"
 	"github.com/oldrain/minigo"
-	"minidemo/app/controllers"
-	"minidemo/lib"
+	"minidemo/app/entry"
 )
 
 func main() {
-	// Environment
-	env := *flag.String("env", "dev", "go run main.go -env=[dev/sit/uat/prod]")
-	flag.Parse()
-
-	// Init config
-	err := lib.InitCfg("config", env)
-	if err != nil {
-		panic(err)
-	}
+	// go run main.go -env=[dev/sit/uat/prod]
+	// fyi: Initialization configuration in lib/config.go
 
 	router := minigo.Default()
 
-	controllers.InitCtl(router)
+	entry.InitEntry(router)
 
 	_ = router.Run(":9527")
 }

@@ -4,7 +4,7 @@ import (
 	"github.com/oldrain/minigo"
 	"minidemo/constant"
 	"minidemo/lib"
-	"minidemo/utils"
+	"minidemo/util"
 )
 
 func LogInput(ctx *minigo.Context) {
@@ -12,8 +12,8 @@ func LogInput(ctx *minigo.Context) {
 
 	logger.Erase()
 
-	logId := utils.UUIDPure()
-	logger.AppendHead(utils.FormatString("%s%s%s", "[", logId, "]"))
+	logId := util.UUIDPure()
+	logger.AppendHead(util.FormatString("%s%s%s", "[", logId, "]"))
 	ctx.Set(constant.LogContext, logger)
 	ctx.SetOutHeader(constant.ContextHeaderLogID, logId)
 

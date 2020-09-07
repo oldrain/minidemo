@@ -2,10 +2,9 @@ package db
 
 import (
 	"github.com/go-redis/redis"
-	"minidemo/constant"
-	"minidemo/dto"
-	"minidemo/lib"
 	"strings"
+	"minidemo/constant"
+	"minidemo/lib"
 	"time"
 )
 
@@ -15,24 +14,26 @@ type RedisClient struct {
 	cluster *redis.ClusterClient
 }
 
+type RedisCfg struct {
+	Addr string
+	Password string
+	Type string
+	Db int
+	PoolSize int
+	PoolTimeout time.Duration
+	IdleTimeout time.Duration
+	MaxRetries int
+	MaxRedirects int
+}
+
 var redisConnections = make(map[string]*RedisClient)
-
-// test client
-func GetTestSingleRedisClient() *RedisClient {
-	return NewRedisClient(constant.ConfigRedisTestSingle)
-}
-
-// test client
-func GetTestClusterRedisClient() *RedisClient {
-	return NewRedisClient(constant.ConfigRedisTestCluster)
-}
 
 func NewRedisClient(conn string) *RedisClient {
 	if exists, ok := redisConnections[conn]; ok && (exists != nil) {
 		return exists
 	}
 
-	var cfg = new(dto.RedisCfg)
+	var cfg = new(RedisCfg)
 	err := lib.CfgBindObj(conn, cfg)
 	if err != nil {
 		lib.GetLogger(constant.LogRedis).Error(err)
@@ -59,7 +60,7 @@ func NewRedisClient(conn string) *RedisClient {
 	return client
 }
 
-func RedisSingleClient(cfg *dto.RedisCfg) *redis.Client {
+func RedisSingleClient(cfg *RedisCfg) *redis.Client {
 	return redis.NewClient(&redis.Options{
 		Addr: cfg.Addr,
 		Password: cfg.Password,
@@ -71,7 +72,7 @@ func RedisSingleClient(cfg *dto.RedisCfg) *redis.Client {
 	})
 }
 
-func RedisClusterClient(cfg *dto.RedisCfg) *redis.ClusterClient {
+func RedisClusterClient(cfg *RedisCfg) *redis.ClusterClient {
 	return redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs: strings.Split(cfg.Addr, ","),
 		Password: cfg.Password,

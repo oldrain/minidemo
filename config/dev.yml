@@ -1,19 +1,51 @@
 app:
-  name: demo
+  name: minidemo
   env: dev
 
 error:
   200: Success
-  10001: System error
+  10000: System error
+  10001: Params error
+  # biz error
+  20001: Need login
+  20002: Login session expired
+  20003: Need register
+  20004: Need user info
+  20005: Need phone number
+  20006: User has registered
+
+mesh:
+  partnerId: xx
+  appId: xx
+
+jwt:
+  secretKey: xxx
+  expireSec: 604800 #A week
 
 mysql:
-  userMaster:
-    url: root:123456@(127.0.0.1:3306)/user?charset=utf8mb4&parseTime=True&loc=Local
+  usersPrimary:
+    url: root:123456@(127.0.0.1:3306)/users?charset=utf8mb4&parseTime=True&loc=Local
+    maxOpenConn: 100
+    maxIdleConn: 10
+    connMaxLifeTime: 60
+  usersReplica:
+    url: root:123456@(127.0.0.1:3306)/users?charset=utf8mb4&parseTime=True&loc=Local
     maxOpenConn: 100
     maxIdleConn: 10
     connMaxLifeTime: 60
 
 redis:
+  app:
+    addr: 127.0.0.1:6379
+    password:
+    type: single
+    db: 0
+    poolSize: 10
+    poolTimeout: 30
+    idleTimeout: 30
+    MaxRetries: 3
+    maxRedirects: 3
+
   testSingle:
     addr: 127.0.0.1:6379
     password:

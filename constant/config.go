@@ -2,13 +2,29 @@ package constant
 
 const (
 	// App
-	ConfigAppName = "app.name"
-	ConfigAppEnv = "app.env"
+	CfgAppName = "app.name"
+	CfgAppEnv = "app.env"
+
+	// error
+	CfgError = "error.%d"
+
+	// mesh
+	CfgMeshPartnerId = "mesh.partnerId"
+	CfgMeshAppId = "mesh.appId"
+
+	// jwt
+	CfgJwtSecretKey = "jwt.secretKey"
+	CfgJwtExpireSec = "jwt.expireSec"
+
+	// mp
+	CfgMpAppId = "mp.appId"
+	CfgMpAppKey = "mp.appKey"
 
 	// MySQL
-	ConfigMysqlUserMaster = "mysql.userMaster"
+	CfgMysqlUsersPrimary = "mysql.usersPrimary"
 
 	// Redis
-	ConfigRedisTestSingle = "redis.testSingle"
-	ConfigRedisTestCluster = "redis.testCluster"
+	CfgRedisApp = "redis.app"
+	CfgRedisTestSingle = "redis.testSingle"
+	CfgRedisTestCluster = "redis.testCluster"
 )
